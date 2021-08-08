@@ -1,0 +1,83 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="brand">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Product Manager</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="brand-bg">
+            <div class="container">
+                <form class="main_form" method="post" enctype="multipart/form-data" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <label>Choose your product picture: </label><input class="form-control" type="file" name="file">
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                            
+                                  {{ form.inputName.label(class="sr-only") }}
+                                  {{ form.inputName(class="form-control", placeholder="Product Name") }}
+                                  {% if form.inputName.errors %}
+                                    {% for error in form.inputName.errors %}
+                                    <label>{{ error }}</label>
+                                    {% endfor %}
+                                  {% endif %}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                            
+                                  {{ form.inputDes.label(class="sr-only") }}
+                                  {{ form.inputDes(class="form-control", placeholder="Product Description") }}
+                                  {% if form.inputDes.errors %}
+                                    {% for error in form.inputDes.errors %}
+                                    <label>{{ error }}</label>
+                                    {% endfor %}
+                                  {% endif %}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                            
+                                  {{ form.inputPrice.label(class="sr-only") }}
+                                  {{ form.inputPrice(class="form-control", placeholder="Product Price") }}
+                                  {% if form.inputPrice.errors %}
+                                    {% for error in form.inputPrice.errors %}
+                                    <label>{{ error }}</label>
+                                    {% endfor %}
+                                  {% endif %}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                            {{ form.submit(class="send") }}
+                        </div>
+                    </div>
+                </form>
+                
+                <table class="table table-striped table-bordered table-hover">
+                    <tr>
+                        <td width="90">Image</td>
+                        <td width="90">ID</td>
+                        <td>Product</td>
+                        <td>Description</td>
+                        <td>Price</td>
+                        <td>Status</td>
+                        <td width="90">Tool</td>
+                        
+                    </tr>
+                    {% for product in products %}
+                    <tr>
+                        <td  ><img src="{{ pImgs[product.product_id-1] }}" alt="" width="80" height="80" ></td>
+                        <td> {{ product.product_id }} </td>
+                        <td> {{ product.product_name}} </td>
+                        <td> {{ product.description }} </td>
+                        <td> {{ product.price }} </td>
+                        <td> {{ product.status }} </td>
+                        <td><a class="btn btn-warning" href="/edit/{{ product.product_id }}">Edit</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

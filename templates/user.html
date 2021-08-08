@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="main_form" method="post"enctype="multipart/form-data"  novalidate>
+                        <div class="row">                            
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">                                
+                                <img src="{{ userImg }}">                                     
+                                <input type = "file" name = "file" />                              
+                                <input type = "submit" value="Accept" name="accept"/>
+                                <input type = "submit" value="Cancel" name="cancel"/>
+
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" >
+                                <h1>{{ user.full_name }}</h1>
+                                <h2><img src="../static/icon/email.png"> {{ user.email }}</h2>
+                                <h2><img src="../static/icon/call.png" alt=""> Phonenumbers:</h2>
+                                {% for phone in user.phones %}                                
+                                <h2>&emsp;&emsp;&emsp;{{ phone.phonenumber }}</h2>
+                                {% endfor %}
+                                <h2><img src="../static/icon/loc.png" alt=""> Adrdresses:</h2>
+                                {% for addr in user.addresses %}                                
+                                <h2>&emsp;&emsp;&emsp;{{ addr.address }}</h2>
+                                {% endfor %}                                                            
+                            </div>
+                            
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" >
+                                {% if manager %}
+                                <input type = "submit" value="Accept" name="accept"/>
+                                <input class="Manager product" type = "s" value="Cancel" name="cancel"/>
+                                {% endif %}
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" >                                
+                                <input class="send" type="submit" name="logout" value="Log out" id="">                                                            
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

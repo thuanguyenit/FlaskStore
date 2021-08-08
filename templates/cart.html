@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+{% block content %}
+<form action="" method="POST" novalidate>
+    <div class="brand">
+        <div class="brand-bg">
+            <div class="container">               
+                <table class="table table-striped table-bordered table-hover">
+                    <tr>
+                        <td width="90">Image</td>
+                        <td width="90">ID</td>
+                        <td>Product</td>
+                        <td>Description</td>
+                        <td>Price</td>
+                        <td width="140">Count</td>
+                        <td>Cost</td>
+                        <td width="90">Tool</td>
+                        
+                    </tr>
+                    {% for c in carts %}
+                    <tr>
+                        <td  ><img src="{{ pImgs[c.product_id-1] }}" alt="" width="80" height="80" ></td>
+                        <td> {{ c.product_id }} </td>
+                        <td> {{ products[c.product_id-1].product_name}} </td>
+                        <td> {{ products[c.product_id-1].description }} </td>
+                        <td> {{ products[c.product_id-1].price }} </td>
+                        <td> <button type="submit" class="btn btn-warning" name="+{{ c.product_id }}">+</button> {{ c.count }} <button type="submit" class="btn btn-warning" name="-{{ c.product_id }}">-</button> </td>
+                        <td> {{c.count * products[c.product_id-1].price }} </td>
+                        <td><button class="btn btn-danger" type="submit" name="r{{ c.product_id }}">Remove</button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div>
+                    <a class="read-more" href="/placeOrder">Place an order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

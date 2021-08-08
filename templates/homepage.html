@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block content %}
+<form action="" method="POST" novalidate>
+<div class="brand">
+        <div class="brand-bg">
+            <div class="container">
+                <div class="row">
+                    {% for p in products %}
+                    {% if p.status == "Active" %}
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
+                        <div class="brand_box">
+                            <img src="{{ pImgs[p.product_id-1] }}" alt="img" />
+                            <h3>$<strong class="red">{{p.price}}</strong></h3>
+                            <span>{{p.product_name}}</span>
+                            <a  class="read-more" href="product/{{p.product_id}}">Buy now</a>
+                        </div>                        
+                    </div>
+                    {% endif %} 
+                    {% endfor %}                               
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

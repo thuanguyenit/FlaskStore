@@ -1,0 +1,113 @@
+{% extends "index.html" %}
+{% block content %}
+<form action="" method="POST" novalidate>
+    <div class="brand">
+        <div class="brand-bg">
+            <div class="container">               
+                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                <div class="alert alert-danger">
+                                    <h2>{{ message }}</h2>
+                                </div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% endwith %}
+                <table class="table table-striped table-bordered table-hover">
+                    <tr>
+                        <td width="90">Image</td>
+                        <td width="90">ID</td>
+                        <td>Product</td>
+                        <td>Description</td>
+                        <td>Price</td>
+                        <td>Count</td>
+                        <td>Cost</td>
+                        
+                        
+                    </tr>
+                    {% for c in carts %}
+                    <tr>
+                        <td  ><img src="{{ pImgs[c.product_id-1] }}" alt="" width="80" height="80" ></td>
+                        <td> {{ c.product_id }} </td>
+                        <td> {{ products[c.product_id-1].product_name}} </td>
+                        <td> {{ products[c.product_id-1].description }} </td>
+                        <td> {{ products[c.product_id-1].price }} </td>
+                        <td> {{ c.count }} </td>
+                        <td> {{c.count * products[c.product_id-1].price }} </td>
+                        
+                    </tr>
+                    {% endfor %}
+                    <th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                        <td>Total cost</td>
+                        <td>{{sum}} $</td>
+                    </th>
+                </table>                
+            </div>
+        </div>
+    </div>
+    
+
+</form>
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="main_form" method="post" novalidate>
+                  
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Your delivery infomation</h1>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>Reciver:</h2>
+                        </div>
+                        <div class="col-md-9">
+                            <h2> {{user.full_name}} </h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>Email:</h2>
+                        </div>
+                        <div class="col-md-9">
+                            <h2> {{user.email}} </h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>Phone:</h2>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="custom-select" name="phone" id="">
+                                {% for p in user.phones %}
+                                <option value="{{ p.phonenumber }}">{{ p.phonenumber}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>Address:</h2>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="custom-select" name="address" id="">
+                                {% for p in user.addresses %}
+                                <option value="{{ p.address }}">{{ p.address }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            
+                                <button class="read-more" type="submit" name="order" >Order</button>               
+                            
+                            
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

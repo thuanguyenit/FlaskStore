@@ -1,0 +1,95 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="main_form" method="post" novalidate>
+                      {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                <div class="alert alert-danger">
+                                    <h2>{{ message }}</h2>
+                                </div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="col-md-12">
+                                <label><h2>Full name</h2></label>
+                                {{ form.inputFullName.label(class="sr-only") }}
+                                {{ form.inputFullName(class="form-control", placeholder="Your first name") }}
+                                {% if form.inputFullName.errors %}
+                                  {% for error in form.inputFullName.errors %}
+                                    <label>{{ error }}</label>
+                                  {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-12">
+                                <label><h2>Email</h2></label>
+                                  {{ form.inputEmail.label(class="sr-only") }}
+                                  {{ form.inputEmail(class="form-control", placeholder="Your Email") }}
+                                  {% if form.inputEmail.errors %}
+                                    {% for error in form.inputEmail.errors %}
+                                    <label>{{ error }}</label>
+                                    {% endfor %}
+                                  {% endif %}
+                            </div>
+                            <div class="col-md-12">
+                                <label><h2>Phone number</h2></label>
+                                {{ form.inputPhone.label(class="sr-only") }}
+                                {{ form.inputPhone(class="form-control", placeholder="Your Phone number") }}
+                                {% if form.inputPhone.errors %}
+                                  {% for error in form.inputPhone.errors %}
+                                    <label>{{ error }}</label>
+                                  {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-12">
+                                <label><h2>Address</h2></label>
+                                {{ form.inputAddress.label(class="sr-only") }}
+                                {{ form.inputAddress(class="form-control", placeholder="Your Address") }}
+                                {% if form.inputAddress.errors %}
+                                  {% for error in form.inputAddress.errors %}
+                                    <label>{{ error }}</label>
+                                  {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class=" col-md-12">
+                                <label><h2>Password</h2></label>
+                              {{ form.inputPassword.label(class="sr-only") }}
+                              {{ form.inputPassword(class="form-control", placeholder="Your password") }}
+                              {% if form.inputPassword.errors %}
+                                {% for error in form.inputPassword.errors %}
+                                    <label>{{ error }}</label>
+                                {% endfor %}
+                              {% endif %}
+                            </div>
+                            <div class="col-md-12">
+                                <label><h2>Confirm Password</h2></label>
+                                {{ form.inputConfirmPassword.label(class="sr-only") }}
+                                {{ form.inputConfirmPassword(class="form-control", placeholder="Confirm your password above") }}
+                                {% if form.inputConfirmPassword.errors %}
+                                {% for error in form.inputConfirmPassword.errors %}
+                                <div class="alert alert-danger">
+                                    <label>{{ error }}</label>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class=" col-md-12">
+                                {{ form.submit(class="send") }}
+                            </div>
+                            <div class=" col-md-12">
+                                <h4><a href="login">You already have an account? Login here</a></h4>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
